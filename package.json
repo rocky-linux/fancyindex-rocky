@@ -1,0 +1,12 @@
+{
+  "name": "nginx-fancyindex-rocky",
+  "version": "1.0.0",
+  "description": "Rocky Linux themed NGINX fancyindex",
+  "scripts": {
+    "build": "lessc theme.less theme.css",
+    "watch": "lessc --watch theme.less theme.css"
+  },
+  "devDependencies": {
+    "less": "^4.2.0"
+  }
+}

@@ -1,0 +1,263 @@
+/* This file is part of nginx-fancyindex-flat-theme.
+ * Modified for Rocky Linux by Michael Kinder
+ */
+
+/* This theme heavily uses Twitter Bootstrap (v4). That means, bootstrap CSS
+ * classes will be used if possible and modified or enhanced by classes defined
+ * in this less file (and dependent files). However, the bootstrap sources will
+ * not be used and compiled in this theme for simplicity, so one served by a
+ * central CDN may be used.
+ *
+ * Although this code shouldn't be affected by Bootstrap's licensing and/or
+ * copyright, we'd like to inform anyone, that Bootstrap is licensed under the
+ * MIT license.
+ *
+ *   Copyright (c) 2011-2018 Twitter, Inc.
+ *   Copyright (c) 2011-2018 The Bootstrap Authors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ *
+ * NOTE: The following comment will be used as short version of the copyright
+ *       notice above to be included in compressed files, too.
+ */
+
+/*!
+ * This file is part of the nginx-fancyindex-flat-theme (licensed under the GPL
+ * license) and uses Twitter Bootstrap (v4) (licensed under the MIT license).
+ *
+ * Copyright (C)
+ *  2018 Alexander Haase <ahaase@alexhaase.de>
+ *
+ * See the LICENSE file for details.
+ */
+
+// Rocky Linux Colors
+@rocky-green: #10b981;
+@rocky-green-light: #34d399;
+@rocky-blue: #0284c7;
+
+// Dark mode colors
+@dark-bg: #121212;
+@dark-surface: #1e1e1e;
+@dark-border: #1e1e1e;
+@dark-border-subtle: #232323;
+
+// Base colors
+@white: #fff;
+@gray-100: #f8f9fa;
+@gray-200: #e9ecef;
+@gray-300: #dee2e6;
+@gray-400: #ced4da;
+@gray-500: #adb5bd;
+@gray-600: #6c757d;
+@gray-700: #495057;
+@gray-800: #343a40;
+@gray-900: #212529;
+@black: #000;
+
+@brandColor: @rocky-green;
+
+/* Import base styles */
+@import "less/colors";
+@import "less/list";
+
+/* Base styles - Light mode by default */
+body {
+  background-color: @white;
+  color: @gray-900;
+
+  .navbar {
+    background-color: @white;
+    border-bottom: 1px solid @gray-200;
+  }
+
+  .navbar-brand {
+    color: @gray-900;
+
+    img {
+      filter: none;
+    }
+  }
+
+  .breadcrumb {
+    background-color: @gray-100;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+  }
+
+  .list-group-item {
+    background-color: @white;
+    border-color: @gray-200;
+    color: @gray-900;
+
+    &:hover {
+      background-color: @gray-100;
+    }
+
+    a {
+      color: @rocky-green;
+      text-decoration: none;
+
+      &:hover {
+        color: darken(@rocky-green, 10%);
+      }
+    }
+  }
+
+  .footer {
+    background-color: @white;
+    border-top: 1px solid @gray-200;
+    padding: 1rem 0;
+
+    a {
+      color: @rocky-green;
+      text-decoration: none;
+
+      &:hover {
+        color: darken(@rocky-green, 10%);
+      }
+    }
+  }
+
+  .btn-outline-secondary {
+    color: @gray-600;
+    border-color: @gray-300;
+
+    &:hover {
+      background-color: @gray-100;
+      border-color: @gray-400;
+      color: @gray-800;
+    }
+  }
+}
+
+/* Dark mode styles - activated by system preference */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: @dark-bg;
+    color: #e2e8f0;
+
+    .navbar {
+      background-color: @dark-bg;
+      border-bottom: 1px solid @dark-border-subtle;
+    }
+
+    .navbar-brand {
+      color: #e2e8f0;
+
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    .breadcrumb {
+      background-color: @dark-surface;
+      border: 1px solid @dark-border;
+    }
+
+    .list-group-item {
+      background-color: @dark-surface;
+      border-color: @dark-border;
+      color: #e2e8f0;
+
+      &:hover {
+        background-color: lighten(@dark-surface, 5%);
+      }
+
+      a {
+        color: @rocky-green;
+
+        &:hover {
+          color: @rocky-green-light;
+        }
+      }
+    }
+
+    .footer {
+      background-color: @dark-bg;
+      border-top: 1px solid @dark-border-subtle;
+
+      a {
+        color: @rocky-green;
+
+        &:hover {
+          color: @rocky-green-light;
+        }
+      }
+
+      .text-muted {
+        color: #94a3b8 !important;
+      }
+    }
+
+    // Fix table header text color and borders
+    th,
+    td {
+      color: #e2e8f0 !important;
+      border-color: @dark-border !important;
+    }
+
+    th {
+      border-bottom: 1px solid @dark-border-subtle;
+      color: @rocky-green;
+    }
+
+    th a {
+      color: @rocky-green !important;
+
+      &:hover {
+        color: @rocky-green-light !important;
+      }
+    }
+
+    // Make table borders more subtle
+    .list-group {
+      border-top: 1px solid @dark-border;
+    }
+
+    .list-group-item {
+      border-color: @dark-border;
+      color: #e2e8f0;
+
+      // Fix file name text color
+      > a {
+        color: #e2e8f0 !important;
+
+        &:hover {
+          color: @rocky-green !important;
+        }
+      }
+    }
+
+    // Target file names specifically
+    tr {
+      color: #e2e8f0;
+    }
+
+    td a {
+      color: #e2e8f0 !important;
+
+      &:hover {
+        color: @rocky-green !important;
+      }
+    }
+  }
+}
