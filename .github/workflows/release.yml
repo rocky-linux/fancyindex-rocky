@@ -29,6 +29,9 @@ jobs:
         run: |
           mkdir release
           cp -r {theme.css,header.html,footer.html,js,images} release/
+          # Set permissions - files to 644, directories to 755
+          find release -type f -exec chmod 644 {} \;
+          find release -type d -exec chmod 755 {} \;
           cd release
           zip -r ../rocky-nginx-theme.zip .
 
