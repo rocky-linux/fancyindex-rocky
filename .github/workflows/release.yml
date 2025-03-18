@@ -1,0 +1,45 @@
+name: Build and Release Theme
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build theme
+        run: npm run build
+
+      - name: Create release files
+        run: |
+          mkdir release
+          cp -r {theme.css,header.html,footer.html,js} release/
+          cd release
+          zip -r ../rocky-nginx-theme.zip .
+
+      - name: Generate timestamp
+        id: timestamp
+        run: echo "timestamp=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.timestamp.outputs.timestamp }}
+          name: Release ${{ steps.timestamp.outputs.timestamp }}
+          files: rocky-nginx-theme.zip
+          generate_release_notes: true
